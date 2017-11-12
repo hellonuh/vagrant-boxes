@@ -1,0 +1,12 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ol74"
+  config.vm.box_url = "http://yum.oracle.com/boxes/oraclelinux/ol74/ol74.box"
+  config.vm.network :forwarded_port, guest: 7777, host: 7777
+  config.vm.network :forwarded_port, guest: 4443, host: 4443
+  config.vm.provision "shell", path: "bootstrap.sh"
+  config.vm.provider "virtualbox" do |v|
+    v.name = "ohs"
+    v.memory = 1024
+    v.cpus = 1
+  end
+end
