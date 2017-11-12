@@ -1,0 +1,3 @@
+download
+cx_Oracle-5.2.1-12c-py27-1.x86_64.rpm
+and put in this directory

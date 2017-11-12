@@ -1,0 +1,3 @@
+download 
+jdk-8u101-linux-x64
+and paste in the folder before starting
