@@ -1,0 +1,3 @@
+download 
+jdk-8u101-linux-x64.rpm
+and copy in this file or make modifications in you bootstrap.sh file
