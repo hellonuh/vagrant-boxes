@@ -1,23 +1,18 @@
 #!/usr/bin/sh
 echo "provisioning the box"
-yum -y install subversion
+yum install -y httpd subversion mod_dav_svn
 yum clean all
-#svn --version
-mkdir /srv/svn
-svnadmin create /srv/svn
-yes | cp /vagrant/conf/svnserve.conf /srv/svn/conf
-yes | cp /vagrant/conf/passwd /srv/svn/conf
-# svnserve -d -r /srv/svn
-#curl http://localhost:3690
-#svn import ~/Documents/my-first-project svn://myserver:3690/my-first-project -m "Initial commit." --username robert --password hunter2
-#svn import . svn://localhost:3690/my-first-project -m "Initial commit." --username nuh --password nuh
-# cp /vagrant/scripts/mySvn*.sh /usr/bin
-# chmod +x /usr/bin/mySvnServerSt*
-# cp /vagrant/scripts/mySvnServer.service /etc/systemd/system
-# systemctl daemon-reload
-# systemctl start mySvnServer
-# systemctl enable mySvnServer
-cp /vagrant/scripts/svnserve /etc/default
-cp /vagrant/scripts/svnserve.service /etc/systemd/system
-systemctl start svnserve
-systemctl enable svnserve
+mkdir -p /var/local/svn
+mkdir /etc/httpd/dav_svn
+cp /vagrant/files/dav_svn.conf /etc/httpd/config.modules.d/
+cp /vagrant/dav_svn_authz /etc/httpd/dav_svn/
+cp /vagrant/files/svn-project-creator.sh /usr/local/bin/
+cp /vagrant/files/svn-entrypoint.sh /usr/local/bin/
+chmod a+x /usr/local/bin/svn*
+htpasswd -bc /etc/httpd/dav_svn/dav_svn.passwd admin admin
+htpasswd -bc /etc/httpd/dav_svn/dav_svn.passwd jenkins jenkins
+htpasswd -bc /etc/httpd/dav_svn/dav_svn.passwd readonly readonly
+svnadmin create /var/local/svn/testrepo
+chown -R apache:apache "/var/local/svn/" && chmod -R 775 "/var/local/svn/"
+systemctl start httpd
+systemctl enable httpd
