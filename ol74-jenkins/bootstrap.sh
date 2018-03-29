@@ -1,6 +1,7 @@
 #!/usr/bin/sh
 echo "provisioning the box"
 wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+# wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 yum -y install java-1.8.0-openjdk.x86_64 jenkins 
 yum clean all && rm -rf /var/cache/yum
