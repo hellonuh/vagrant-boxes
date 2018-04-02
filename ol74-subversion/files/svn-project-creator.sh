@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # variables
-SVNDIR="/srv/svn/"
+SVNDIR="/var/local/svn/"
 
 find $SVNDIR* -maxdepth 0 -type d | while IFS= read -r DIR
 do
