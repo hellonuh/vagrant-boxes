@@ -1,0 +1,1 @@
+download and copy jdk-8u181-linux-x64.rpm in this folder from oracle website.
