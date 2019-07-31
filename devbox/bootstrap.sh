@@ -8,7 +8,7 @@ yum install -y curl wget zip unzip
 rpm -ivh /vagrant/software/jdk-8u181-linux-x64.rpm
 # install nodejs
 yum install -y gcc-c++ make curl wget zip unzip
-curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 yum install -y nodejs
 # install docker
 yum install -y docker-engine
